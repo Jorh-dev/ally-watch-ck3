@@ -134,5 +134,8 @@ useful file.
 
 ## License
 
-MIT — see [LICENSE](LICENSE). Translate it, fork it, fix it, fold it into your own mod;
-just keep the copyright notice with the source.
+All rights reserved — see [LICENSE](LICENSE).
+
+The source is here so you can read it and report problems, not so it can be re-uploaded.
+Please do not publish this mod, or a fork, fix or translation of it, anywhere. If it breaks
+on a new patch, open an issue instead — it will be fixed and republished here.
