@@ -80,6 +80,21 @@
  allywatch.0002.back:0 "Listeye dön"
 
  #############################
+ ### Müttefik sayısı (custom loc dalları - dilden bağımsız)
+ #############################
+ allywatch_count_0:0 "0"
+ allywatch_count_1:0 "1"
+ allywatch_count_2:0 "2"
+ allywatch_count_3:0 "3"
+ allywatch_count_4:0 "4"
+ allywatch_count_5:0 "5"
+ allywatch_count_6:0 "6"
+ allywatch_count_7:0 "7"
+ allywatch_count_8:0 "8"
+ allywatch_count_9:0 "9"
+ allywatch_count_many:0 "10+"
+
+ #############################
  ### Mesaj ayarları
  #############################
  message_filter_allywatch_report:0 "Müttefik durumu paneli"
