@@ -7,11 +7,13 @@
  allywatch_track_interaction_desc:0 "Add this ruler to your watch list. You will be notified whenever they lose an ally, gain one, or die."
  allywatch_untrack_interaction:0 "Stop Watching"
  allywatch_untrack_interaction_desc:0 "Remove this ruler from your watch list. No more notifications about them."
+ allywatch_list_interaction:0 "My Watch List"
+ allywatch_list_interaction_desc:0 "Open the list of rulers you are watching. From there you can set how quiet each one should be, or stop watching them."
  allywatch_report_interaction:0 "Alliance Status"
  allywatch_report_interaction_desc:0 "See who this ruler is allied with right now, and which alliances of theirs have fallen apart while you were watching."
 
  allywatch_track_started_toast:0 "Now Watching"
- allywatch_track_started_toast_tt:0 "You will be notified when [LEFT_CHARACTER.GetShortUINameNoTooltip] loses an ally, gains an ally, or dies.\nThey currently have #V [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#! allies."
+ allywatch_track_started_toast_tt:0 "You will be notified when [LEFT_CHARACTER.GetShortUINameNoTooltip] loses an ally, gains an ally, or dies.\n#low Open Alliance Status on their portrait to see who those allies are.#!"
  allywatch_track_stopped_toast:0 "No Longer Watching"
  allywatch_track_stopped_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] has been removed from your watch list."
 
@@ -19,13 +21,13 @@
  ### Notifications
  #############################
  allywatch_msg_ally_lost:0 "Ally Lost: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
- allywatch_msg_ally_lost_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] is no longer allied with [RIGHT_CHARACTER.GetUINameNoTooltip].\nAllies remaining: #V [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
+ allywatch_msg_ally_lost_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] is no longer allied with [RIGHT_CHARACTER.GetUINameNoTooltip].\nAllies remaining: #V [allywatch_msg_char.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
 
  allywatch_msg_no_allies:0 "No Allies Left: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_msg_no_allies_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] has lost their last ally, [RIGHT_CHARACTER.GetUINameNoTooltip], and now stands alone.\n#P Nobody will be called to their defence.#!"
 
  allywatch_msg_ally_gained:0 "New Ally: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
- allywatch_msg_ally_gained_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] has formed an alliance with [RIGHT_CHARACTER.GetUINameNoTooltip].\nAllies now: #N [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
+ allywatch_msg_ally_gained_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] has formed an alliance with [RIGHT_CHARACTER.GetUINameNoTooltip].\nAllies now: #N [allywatch_msg_char.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
 
  allywatch_msg_death:0 "Watched Ruler Died: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_msg_death_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] has died at the age of [LEFT_CHARACTER.GetAge]. Every alliance they held died with them.\nThe successor is [RIGHT_CHARACTER.GetUINameNoTooltip].\n#low Removed from your watch list. Watch the successor if you want to keep following them.#!"
@@ -38,10 +40,44 @@
  #############################
  allywatch_msg_report:0 "@alliance_icon! Alliance Status: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_report_allies_header:0 "#bold Currently allied with:#!"
- allywatch_report_ally_line:0 "  @alliance_icon! #P [THIS.GetShortUINameNoTooltip]#!"
+ allywatch_report_ally_line:0 "  @alliance_icon! #P [THIS.GetCharacter.GetShortUIName]#!"
  allywatch_report_no_allies:0 "#bold No allies.#! #P They stand alone.#!"
  allywatch_report_broken_header:0 "\n#bold Alliances broken while you watched:#!"
- allywatch_report_broken_line:0 "  @war_icon! #N [THIS.GetShortUINameNoTooltip]#!"
+ allywatch_report_broken_line:0 "  @war_icon! #N [THIS.GetCharacter.GetShortUIName]#!"
+
+ #############################
+ ### Watch list panel
+ #############################
+ allywatch.0001.t:0 "Your Watch List"
+ allywatch.0001.desc:0 "You are keeping an eye on #V [GetPlayer.MakeScope.ScriptValue('allywatch_tracked_count')|0]#! rulers.\nPick one to change how loudly they are reported, or to stop watching them."
+ allywatch.0001.slot1:0 "@alliance_icon! [allywatch_slot1.GetShortUIName] — #V [allywatch_slot1.MakeScope.ScriptValue('allywatch_ally_count')|0]#! allies"
+ allywatch.0001.slot2:0 "@alliance_icon! [allywatch_slot2.GetShortUIName] — #V [allywatch_slot2.MakeScope.ScriptValue('allywatch_ally_count')|0]#! allies"
+ allywatch.0001.slot3:0 "@alliance_icon! [allywatch_slot3.GetShortUIName] — #V [allywatch_slot3.MakeScope.ScriptValue('allywatch_ally_count')|0]#! allies"
+ allywatch.0001.slot4:0 "@alliance_icon! [allywatch_slot4.GetShortUIName] — #V [allywatch_slot4.MakeScope.ScriptValue('allywatch_ally_count')|0]#! allies"
+ allywatch.0001.slot5:0 "@alliance_icon! [allywatch_slot5.GetShortUIName] — #V [allywatch_slot5.MakeScope.ScriptValue('allywatch_ally_count')|0]#! allies"
+ allywatch.0001.slot6:0 "@alliance_icon! [allywatch_slot6.GetShortUIName] — #V [allywatch_slot6.MakeScope.ScriptValue('allywatch_ally_count')|0]#! allies"
+ allywatch.0001.next_page:0 "Show the next six"
+ allywatch.0001.clear_all:0 "#N Stop watching everyone#!"
+ allywatch.0001.close:0 "Close"
+
+ allywatch.0002.t:0 "[allywatch_watched.GetShortUINameNoTooltip]"
+ allywatch.0002.desc_intro:0 "[allywatch_watched.GetUINameNoTooltip] currently has #V [allywatch_watched.MakeScope.ScriptValue('allywatch_ally_count')|0]#! allies.\n"
+ allywatch.0002.desc_thr_none:0 "Reporting: #V every alliance they gain or lose#!.\nAsk for it later if you only care once they are nearly alone."
+ allywatch.0002.desc_thr_0:0 "Reporting: #V only when they have no allies left#!.\nEverything before that stays quiet."
+ allywatch.0002.desc_thr_1:0 "Reporting: #V once they are down to 1 ally#!.\nAnything above that stays quiet."
+ allywatch.0002.desc_thr_2:0 "Reporting: #V once they are down to 2 allies or fewer#!.\nAnything above that stays quiet."
+ allywatch.0002.desc_thr_3:0 "Reporting: #V once they are down to 3 allies or fewer#!.\nAnything above that stays quiet."
+ allywatch.0002.desc_thr_4:0 "Reporting: #V once they are down to 4 allies or fewer#!.\nAnything above that stays quiet."
+ allywatch.0002.desc_thr_5:0 "Reporting: #V once they are down to 5 allies or fewer#!.\nAnything above that stays quiet."
+ allywatch.0002.desc_thr_6:0 "Reporting: #V once they are down to 6 allies or fewer#!.\nAnything above that stays quiet."
+ allywatch.0002.desc_thr_7:0 "Reporting: #V once they are down to 7 allies or fewer#!.\nAnything above that stays quiet."
+ allywatch.0002.desc_thr_8:0 "Reporting: #V once they are down to 8 allies or fewer#!.\nAnything above that stays quiet."
+ allywatch.0002.set_quietest:0 "Only tell me when they have no allies left"
+ allywatch.0002.raise:0 "Report one ally earlier"
+ allywatch.0002.lower:0 "Report one ally later"
+ allywatch.0002.clear:0 "Go back to hearing every change"
+ allywatch.0002.untrack:0 "#N Stop watching them#!"
+ allywatch.0002.back:0 "Back to the list"
 
  #############################
  ### Message settings

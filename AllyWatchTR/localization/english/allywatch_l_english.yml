@@ -7,11 +7,13 @@
  allywatch_track_interaction_desc:0 "Bu hükümdarı takip listene ekler. Müttefik kaybettiğinde, yeni müttefik edindiğinde veya öldüğünde haber verilir."
  allywatch_untrack_interaction:0 "Takibi Bırak"
  allywatch_untrack_interaction_desc:0 "Bu hükümdarı takip listenden çıkarır. Artık hakkında bildirim gelmez."
+ allywatch_list_interaction:0 "Takip Listem"
+ allywatch_list_interaction_desc:0 "Takip ettiğin hükümdarların listesini açar. Oradan her biri için ne zaman haber verileceğini ayarlayabilir veya takibi bırakabilirsin."
  allywatch_report_interaction:0 "Müttefik Durumu"
  allywatch_report_interaction_desc:0 "Bu hükümdarın şu an kimlerle müttefik olduğunu ve sen takipteyken hangi ittifaklarının bozulduğunu gösterir."
 
  allywatch_track_started_toast:0 "Takibe Alındı"
- allywatch_track_started_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] müttefik kaybettiğinde, yeni müttefik edindiğinde veya öldüğünde haber verilecek.\nŞu anda #V [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefiği var."
+ allywatch_track_started_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] müttefik kaybettiğinde, yeni müttefik edindiğinde veya öldüğünde haber verilecek.\n#low Kimlerle müttefik olduğunu görmek için portresinden Müttefik Durumu'nu aç.#!"
  allywatch_track_stopped_toast:0 "Takip Bırakıldı"
  allywatch_track_stopped_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] takip listenden çıkarıldı."
 
@@ -19,13 +21,13 @@
  ### Bildirimler
  #############################
  allywatch_msg_ally_lost:0 "Müttefik Kaybetti: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
- allywatch_msg_ally_lost_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] ile [RIGHT_CHARACTER.GetUINameNoTooltip] arasındaki ittifak sona erdi.\nKalan müttefik sayısı: #V [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
+ allywatch_msg_ally_lost_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] ile [RIGHT_CHARACTER.GetUINameNoTooltip] arasındaki ittifak sona erdi.\nKalan müttefik sayısı: #V [allywatch_msg_char.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
 
  allywatch_msg_no_allies:0 "Hiç Müttefiği Kalmadı: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_msg_no_allies_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] son müttefiğini de kaybetti: [RIGHT_CHARACTER.GetUINameNoTooltip]. Artık tek başına.\n#P Savaşa çağırabileceği kimse yok.#!"
 
  allywatch_msg_ally_gained:0 "Yeni Müttefik: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
- allywatch_msg_ally_gained_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip], [RIGHT_CHARACTER.GetUINameNoTooltip] ile ittifak kurdu.\nGüncel müttefik sayısı: #N [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
+ allywatch_msg_ally_gained_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip], [RIGHT_CHARACTER.GetUINameNoTooltip] ile ittifak kurdu.\nGüncel müttefik sayısı: #N [allywatch_msg_char.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
 
  allywatch_msg_death:0 "Takip Edilen Hükümdar Öldü: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_msg_death_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] [LEFT_CHARACTER.GetAge] yaşında öldü. Tüm ittifakları da onunla birlikte sona erdi.\nYerine [RIGHT_CHARACTER.GetUINameNoTooltip] geçti.\n#low Takip listenden çıkarıldı. Devam etmek istersen halefini ayrıca takibe alabilirsin.#!"
@@ -38,10 +40,44 @@
  #############################
  allywatch_msg_report:0 "@alliance_icon! Müttefik Durumu: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_report_allies_header:0 "#bold Şu an müttefik olduğu kişiler:#!"
- allywatch_report_ally_line:0 "  @alliance_icon! #P [THIS.GetShortUINameNoTooltip]#!"
+ allywatch_report_ally_line:0 "  @alliance_icon! #P [THIS.GetCharacter.GetShortUIName]#!"
  allywatch_report_no_allies:0 "#bold Hiç müttefiği yok.#! #P Tek başına.#!"
  allywatch_report_broken_header:0 "\n#bold Sen takipteyken ittifakı bozulanlar:#!"
- allywatch_report_broken_line:0 "  @war_icon! #N [THIS.GetShortUINameNoTooltip]#!"
+ allywatch_report_broken_line:0 "  @war_icon! #N [THIS.GetCharacter.GetShortUIName]#!"
+
+ #############################
+ ### Takip listesi paneli
+ #############################
+ allywatch.0001.t:0 "Takip Listen"
+ allywatch.0001.desc:0 "Şu anda #V [GetPlayer.MakeScope.ScriptValue('allywatch_tracked_count')|0]#! hükümdarı izliyorsun.\nBirini seçerek ne zaman haber verileceğini ayarlayabilir veya takibi bırakabilirsin."
+ allywatch.0001.slot1:0 "@alliance_icon! [allywatch_slot1.GetShortUIName] — #V [allywatch_slot1.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefik"
+ allywatch.0001.slot2:0 "@alliance_icon! [allywatch_slot2.GetShortUIName] — #V [allywatch_slot2.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefik"
+ allywatch.0001.slot3:0 "@alliance_icon! [allywatch_slot3.GetShortUIName] — #V [allywatch_slot3.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefik"
+ allywatch.0001.slot4:0 "@alliance_icon! [allywatch_slot4.GetShortUIName] — #V [allywatch_slot4.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefik"
+ allywatch.0001.slot5:0 "@alliance_icon! [allywatch_slot5.GetShortUIName] — #V [allywatch_slot5.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefik"
+ allywatch.0001.slot6:0 "@alliance_icon! [allywatch_slot6.GetShortUIName] — #V [allywatch_slot6.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefik"
+ allywatch.0001.next_page:0 "Sonraki altı kişi"
+ allywatch.0001.clear_all:0 "#N Hepsinin takibini bırak#!"
+ allywatch.0001.close:0 "Kapat"
+
+ allywatch.0002.t:0 "[allywatch_watched.GetShortUINameNoTooltip]"
+ allywatch.0002.desc_intro:0 "[allywatch_watched.GetUINameNoTooltip] şu anda #V [allywatch_watched.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefiğe sahip.\n"
+ allywatch.0002.desc_thr_none:0 "Bildirim: #V her müttefik değişikliğinde#!.\nSadece iyice yalnız kalınca haber almak istersen daha geç haber ver de."
+ allywatch.0002.desc_thr_0:0 "Bildirim: #V sadece hiç müttefiği kalmayınca#!.\nOndan öncesi sessiz geçer."
+ allywatch.0002.desc_thr_1:0 "Bildirim: #V tek müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
+ allywatch.0002.desc_thr_2:0 "Bildirim: #V 2 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
+ allywatch.0002.desc_thr_3:0 "Bildirim: #V 3 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
+ allywatch.0002.desc_thr_4:0 "Bildirim: #V 4 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
+ allywatch.0002.desc_thr_5:0 "Bildirim: #V 5 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
+ allywatch.0002.desc_thr_6:0 "Bildirim: #V 6 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
+ allywatch.0002.desc_thr_7:0 "Bildirim: #V 7 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
+ allywatch.0002.desc_thr_8:0 "Bildirim: #V 8 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
+ allywatch.0002.set_quietest:0 "Sadece hiç müttefiği kalmayınca haber ver"
+ allywatch.0002.raise:0 "Bir müttefik erken haber ver"
+ allywatch.0002.lower:0 "Bir müttefik geç haber ver"
+ allywatch.0002.clear:0 "Yine her değişiklikte haber ver"
+ allywatch.0002.untrack:0 "#N Takibi bırak#!"
+ allywatch.0002.back:0 "Listeye dön"
 
  #############################
  ### Mesaj ayarları

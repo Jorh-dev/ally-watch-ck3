@@ -1,4 +1,4 @@
-# Portrait right-click menu. Free, auto-accepted, recipient is never notified.
+﻿# Portrait right-click menu. Free, auto-accepted, recipient is never notified.
 
 allywatch_track_interaction = {
 	category = interaction_category_diplomacy
@@ -50,6 +50,42 @@ allywatch_track_interaction = {
 				left_icon = scope:recipient
 				custom_tooltip = allywatch_track_started_toast_tt
 			}
+		}
+	}
+}
+
+# Your own portrait. Hidden entirely while the watch list is empty.
+allywatch_list_interaction = {
+	category = interaction_category_diplomacy
+	icon = council
+	interface_priority = 51
+
+	desc = allywatch_list_interaction_desc
+
+	use_diplomatic_range = no
+	auto_accept = yes
+	popup_on_receive = no
+	needs_recipient_to_open = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = scope:recipient
+		scope:actor = {
+			is_ai = no
+			is_alive = yes
+			# Guarded trigger: a player who has never watched anyone has no list at
+			# all, and asking such a list for its size is an error, not a zero.
+			allywatch_is_watching_trigger = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+	}
+
+	on_accept = {
+		scope:actor = {
+			set_variable = { name = allywatch_page value = 0 }
+			trigger_event = allywatch.0001
 		}
 	}
 }
@@ -118,10 +154,7 @@ allywatch_untrack_interaction = {
 
 	on_accept = {
 		scope:actor = {
-			remove_list_variable = {
-				name = allywatch_tracked
-				target = scope:recipient
-			}
+			allywatch_untrack_effect = { TARGET = scope:recipient }
 			send_interface_toast = {
 				title = allywatch_track_stopped_toast
 				left_icon = scope:recipient

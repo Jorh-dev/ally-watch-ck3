@@ -1,4 +1,4 @@
-# The watch list lives only on the watching player, so there is one source of
+﻿# The watch list lives only on the watching player, so there is one source of
 # truth and no reverse index to keep in sync.
 allywatch_is_tracked_trigger = {
 	# $CHARACTER$ = character to check (must be a saved scope, not "this")
@@ -6,6 +6,92 @@ allywatch_is_tracked_trigger = {
 		is_target_in_variable_list = {
 			name = allywatch_tracked
 			target = $CHARACTER$
+		}
+	}
+}
+
+# A variable list that has never been written to does not exist, and asking for its
+# size is an error rather than a zero. Both checks always travel together.
+allywatch_is_watching_trigger = {
+	has_variable_list = allywatch_tracked
+	variable_list_size = {
+		name = allywatch_tracked
+		value > 0
+	}
+}
+
+# Is there a watched ruler at this position in the list?
+# Option visibility hangs on this rather than on "exists = scope:allywatch_slotN":
+# trigger_event carries saved scopes into the next event, so a slot from a previous,
+# longer listing survives and would keep displaying a ruler already dropped.
+allywatch_slot_filled_trigger = {
+	# $POS$ = zero-based position
+	has_variable_list = allywatch_tracked
+	variable_list_size = {
+		name = allywatch_tracked
+		value > $POS$
+	}
+}
+
+# Has the scoped player set any threshold for this ruler?
+allywatch_has_threshold_trigger = {
+	# $TARGET$ = watched character
+	OR = {
+		is_target_in_variable_list = { name = allywatch_thr_0 target = $TARGET$ }
+		is_target_in_variable_list = { name = allywatch_thr_1 target = $TARGET$ }
+		is_target_in_variable_list = { name = allywatch_thr_2 target = $TARGET$ }
+		is_target_in_variable_list = { name = allywatch_thr_3 target = $TARGET$ }
+		is_target_in_variable_list = { name = allywatch_thr_4 target = $TARGET$ }
+		is_target_in_variable_list = { name = allywatch_thr_5 target = $TARGET$ }
+		is_target_in_variable_list = { name = allywatch_thr_6 target = $TARGET$ }
+		is_target_in_variable_list = { name = allywatch_thr_7 target = $TARGET$ }
+		is_target_in_variable_list = { name = allywatch_thr_8 target = $TARGET$ }
+	}
+}
+
+# Should the scoped player hear about this ruler losing an ally?
+# No threshold set means yes. Otherwise only once they are down to it.
+# The membership test runs in the player's scope and the ally count in the
+# watched ruler's, which is why the two cannot be folded into one comparison.
+allywatch_threshold_allows_trigger = {
+	# $WATCHED$ = watched character
+	OR = {
+		NOT = { allywatch_has_threshold_trigger = { TARGET = $WATCHED$ } }
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_0 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 0 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_1 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 1 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_2 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 2 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_3 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 3 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_4 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 4 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_5 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 5 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_6 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 6 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_7 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 7 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_8 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 8 }
 		}
 	}
 }

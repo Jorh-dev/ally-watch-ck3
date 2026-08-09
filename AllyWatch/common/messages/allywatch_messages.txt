@@ -1,4 +1,4 @@
-# Message key = title loc key. LEFT_CHARACTER = tracked character (left_icon),
+﻿# Message key = title loc key. LEFT_CHARACTER = tracked character (left_icon),
 # RIGHT_CHARACTER = ex-ally / new ally / heir (right_icon).
 # Style is from the watching player's side: target losing an ally is good news.
 

@@ -1,8 +1,18 @@
-# Same-key on_actions in separate files get merged, so nothing vanilla is overwritten.
+﻿# An on_action cannot hold two effect blocks. Declaring one here would not append to
+# vanilla's - whichever file loads last silently wins and the other is dropped, which
+# is exactly what happened before: this file beat alliance_on_actions.txt alphabetically
+# and killed vanilla's alliance handling, while death.txt beat this file and killed ours.
+#
+# The documented way to append is to chain a private on_action, leaving vanilla's own
+# effect block untouched. See "MODDING INFO" in common/on_action/_on_actions.info.
+#
 # scope:first / scope:second are unordered, hence every check runs both ways.
 
-# Alliance formed.
 on_alliance_added = {
+	on_actions = { allywatch_on_alliance_added }
+}
+
+allywatch_on_alliance_added = {
 	effect = {
 		allywatch_notify_ally_gained_effect = {
 			WATCHED = scope:first
@@ -17,6 +27,10 @@ on_alliance_added = {
 
 # Alliance ended because its underlying reason went away (marriage dissolved, ally died, ...).
 on_alliance_removed = {
+	on_actions = { allywatch_on_alliance_removed }
+}
+
+allywatch_on_alliance_removed = {
 	effect = {
 		allywatch_notify_ally_lost_effect = {
 			WATCHED = scope:first
@@ -31,6 +45,10 @@ on_alliance_removed = {
 
 # Alliance actively broken by one of the parties.
 on_alliance_broken = {
+	on_actions = { allywatch_on_alliance_broken }
+}
+
+allywatch_on_alliance_broken = {
 	effect = {
 		allywatch_notify_ally_lost_effect = {
 			WATCHED = scope:first
@@ -45,6 +63,10 @@ on_alliance_broken = {
 
 # root = the dying character.
 on_death = {
+	on_actions = { allywatch_on_death }
+}
+
+allywatch_on_death = {
 	effect = {
 		allywatch_notify_death_effect = yes
 	}

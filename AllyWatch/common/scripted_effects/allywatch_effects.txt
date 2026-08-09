@@ -1,5 +1,128 @@
-# Every effect bails out when nobody is watching the character, so alliance churn
+﻿# Every effect bails out when nobody is watching the character, so alliance churn
 # across the rest of the map costs one list check.
+#
+# Notification thresholds live on the WATCHING PLAYER, not on the watched ruler,
+# so two players can watch the same person with different settings. Script has no
+# map type, so one variable list per threshold value stands in for the key-value
+# store: being in allywatch_thr_3 means "tell me once they are down to 3".
+# All threshold effects below run in the watching player's scope.
+
+# Removes any threshold this player set for the target. Shared cleanup step for
+# changing a threshold, dropping a ruler, and death.
+allywatch_clear_threshold_effect = {
+	# $TARGET$ = watched character
+	remove_list_variable = { name = allywatch_thr_0 target = $TARGET$ }
+	remove_list_variable = { name = allywatch_thr_1 target = $TARGET$ }
+	remove_list_variable = { name = allywatch_thr_2 target = $TARGET$ }
+	remove_list_variable = { name = allywatch_thr_3 target = $TARGET$ }
+	remove_list_variable = { name = allywatch_thr_4 target = $TARGET$ }
+	remove_list_variable = { name = allywatch_thr_5 target = $TARGET$ }
+	remove_list_variable = { name = allywatch_thr_6 target = $TARGET$ }
+	remove_list_variable = { name = allywatch_thr_7 target = $TARGET$ }
+	remove_list_variable = { name = allywatch_thr_8 target = $TARGET$ }
+}
+
+# Clear first, then file under the new level, so the target is never in two lists.
+allywatch_set_threshold_effect = {
+	# $TARGET$ = watched character, $LEVEL$ = 0..8
+	allywatch_clear_threshold_effect = { TARGET = $TARGET$ }
+	add_to_variable_list = {
+		name = allywatch_thr_$LEVEL$
+		target = $TARGET$
+	}
+}
+
+# The ladder is 0 (only when alone) up to 8, plus "no threshold" as a separate state
+# reached in one click rather than by walking the whole ladder: setting a threshold
+# lands straight on 0, which is what people actually want, and clearing it is also
+# one click. Stepping is only for the rarely-needed values in between.
+# List names cannot be built from a computed number, so each rung is spelled out.
+# else_if means exactly one branch runs.
+
+# One rung up: report earlier, while they still have allies left.
+allywatch_threshold_up_effect = {
+	# $TARGET$ = watched character
+	if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_7 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 8 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_6 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 7 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_5 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 6 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_4 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 5 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_3 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 4 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_2 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 3 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_1 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 2 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_0 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 1 }
+	}
+}
+
+# One rung down: hold off until they are further down.
+# thr_0 is the bottom, so there it does nothing and the option is hidden.
+allywatch_threshold_down_effect = {
+	# $TARGET$ = watched character
+	if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_8 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 7 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_7 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 6 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_6 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 5 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_5 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 4 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_4 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 3 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_3 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 2 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_2 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 1 }
+	}
+	else_if = {
+		limit = { is_target_in_variable_list = { name = allywatch_thr_1 target = $TARGET$ } }
+		allywatch_set_threshold_effect = { TARGET = $TARGET$ LEVEL = 0 }
+	}
+}
+
+# Drops a ruler from this player's watch list and forgets their threshold.
+allywatch_untrack_effect = {
+	# $TARGET$ = watched character
+	remove_list_variable = {
+		name = allywatch_tracked
+		target = $TARGET$
+	}
+	allywatch_clear_threshold_effect = { TARGET = $TARGET$ }
+}
 
 # Stamps the watched character so the same event is not reported twice.
 allywatch_mark_change_effect = {
@@ -30,6 +153,9 @@ allywatch_notify_ally_lost_effect = {
 			OTHER = $OTHER$
 			VARNAME = allywatch_last_lost
 		}
+		# The message text reads the ally count off this scope. LEFT_CHARACTER has no
+		# MakeScope, and using it there makes the whole string fail to build.
+		$WATCHED$ = { save_scope_as = allywatch_msg_char }
 		every_player = {
 			limit = {
 				is_target_in_variable_list = {
@@ -37,19 +163,25 @@ allywatch_notify_ally_lost_effect = {
 					target = $WATCHED$
 				}
 			}
+			# Losing the last ally is always reported. The intermediate "lost one"
+			# message is the noisy one, so that is what the threshold silences.
 			if = {
 				limit = {
-					$WATCHED$ = { any_ally = { always = yes } }
+					$WATCHED$ = { NOT = { any_ally = { always = yes } } }
 				}
 				send_interface_message = {
-					type = allywatch_msg_ally_lost
+					type = allywatch_msg_no_allies
 					left_icon = $WATCHED$
 					right_icon = $OTHER$
 				}
 			}
-			else = {
+			# Thresholds are per player, so this is checked inside the player loop.
+			else_if = {
+				limit = {
+					allywatch_threshold_allows_trigger = { WATCHED = $WATCHED$ }
+				}
 				send_interface_message = {
-					type = allywatch_msg_no_allies
+					type = allywatch_msg_ally_lost
 					left_icon = $WATCHED$
 					right_icon = $OTHER$
 				}
@@ -114,6 +246,7 @@ allywatch_notify_ally_gained_effect = {
 			OTHER = $OTHER$
 			VARNAME = allywatch_last_gained
 		}
+		$WATCHED$ = { save_scope_as = allywatch_msg_char }
 		every_player = {
 			limit = {
 				is_target_in_variable_list = {
@@ -168,9 +301,12 @@ allywatch_show_report_effect = {
 
 				# Only populated for characters that were on a watch list when the
 				# alliance broke, so this section is simply absent for everyone else.
+				# has_variable_list first: a list never written to does not exist,
+				# and asking for its size is an error rather than a zero.
 				if = {
 					limit = {
 						scope:allywatch_report_target = {
+							has_variable_list = allywatch_ex_allies
 							variable_list_size = {
 								name = allywatch_ex_allies
 								value > 0
@@ -224,10 +360,7 @@ allywatch_notify_death_effect = {
 					left_icon = scope:allywatch_dead
 				}
 			}
-			remove_list_variable = {
-				name = allywatch_tracked
-				target = scope:allywatch_dead
-			}
+			allywatch_untrack_effect = { TARGET = scope:allywatch_dead }
 		}
 	}
 }

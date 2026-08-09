@@ -1,6 +1,25 @@
-# Ally count of the scoped character, used in the notification texts.
+﻿# Ally count of the scoped character, used in the notification texts.
 allywatch_ally_count = {
 	every_ally = {
 		add = 1
 	}
 }
+
+# How many rulers the scoped player is watching.
+allywatch_tracked_count = {
+	every_in_list = {
+		variable = allywatch_tracked
+		add = 1
+	}
+}
+
+# Watch list positions for the six slots on the current page of allywatch.0001.
+allywatch_slot_pos_1 = { value = var:allywatch_page }
+allywatch_slot_pos_2 = { value = var:allywatch_page  add = 1 }
+allywatch_slot_pos_3 = { value = var:allywatch_page  add = 2 }
+allywatch_slot_pos_4 = { value = var:allywatch_page  add = 3 }
+allywatch_slot_pos_5 = { value = var:allywatch_page  add = 4 }
+allywatch_slot_pos_6 = { value = var:allywatch_page  add = 5 }
+
+# The watch list must be longer than this for a next page to exist.
+allywatch_next_page_min = { value = var:allywatch_page  add = 6 }

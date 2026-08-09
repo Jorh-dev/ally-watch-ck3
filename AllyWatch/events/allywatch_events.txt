@@ -1,0 +1,289 @@
+﻿namespace = allywatch
+
+# The watch list. Opened from your own portrait's right-click menu.
+# Six rulers per page; each is a button that opens their own submenu.
+allywatch.0001 = {
+	type = character_event
+	title = allywatch.0001.t
+	desc = allywatch.0001.desc
+	theme = diplomacy
+
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+
+	immediate = {
+		if = {
+			limit = { NOT = { exists = var:allywatch_page } }
+			set_variable = { name = allywatch_page value = 0 }
+		}
+		# Someone may have been dropped since the page was set, which would leave
+		# us stranded past the end of the list.
+		if = {
+			limit = {
+				NOT = { allywatch_slot_filled_trigger = { POS = var:allywatch_page } }
+			}
+			set_variable = { name = allywatch_page value = 0 }
+		}
+
+		# Each slot is guarded by a length check. An out-of-range position does not
+		# come back empty - the game caps it to the last entry, which would repeat
+		# the same ruler across every leftover slot.
+		if = {
+			limit = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_1 } }
+			ordered_in_list = {
+				variable = allywatch_tracked
+				position = allywatch_slot_pos_1
+				save_scope_as = allywatch_slot1
+			}
+		}
+		if = {
+			limit = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_2 } }
+			ordered_in_list = {
+				variable = allywatch_tracked
+				position = allywatch_slot_pos_2
+				save_scope_as = allywatch_slot2
+			}
+		}
+		if = {
+			limit = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_3 } }
+			ordered_in_list = {
+				variable = allywatch_tracked
+				position = allywatch_slot_pos_3
+				save_scope_as = allywatch_slot3
+			}
+		}
+		if = {
+			limit = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_4 } }
+			ordered_in_list = {
+				variable = allywatch_tracked
+				position = allywatch_slot_pos_4
+				save_scope_as = allywatch_slot4
+			}
+		}
+		if = {
+			limit = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_5 } }
+			ordered_in_list = {
+				variable = allywatch_tracked
+				position = allywatch_slot_pos_5
+				save_scope_as = allywatch_slot5
+			}
+		}
+		if = {
+			limit = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_6 } }
+			ordered_in_list = {
+				variable = allywatch_tracked
+				position = allywatch_slot_pos_6
+				save_scope_as = allywatch_slot6
+			}
+		}
+	}
+
+	option = {
+		name = allywatch.0001.slot1
+		trigger = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_1 } }
+		set_variable = { name = allywatch_selected value = scope:allywatch_slot1 }
+		trigger_event = allywatch.0002
+	}
+	option = {
+		name = allywatch.0001.slot2
+		trigger = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_2 } }
+		set_variable = { name = allywatch_selected value = scope:allywatch_slot2 }
+		trigger_event = allywatch.0002
+	}
+	option = {
+		name = allywatch.0001.slot3
+		trigger = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_3 } }
+		set_variable = { name = allywatch_selected value = scope:allywatch_slot3 }
+		trigger_event = allywatch.0002
+	}
+	option = {
+		name = allywatch.0001.slot4
+		trigger = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_4 } }
+		set_variable = { name = allywatch_selected value = scope:allywatch_slot4 }
+		trigger_event = allywatch.0002
+	}
+	option = {
+		name = allywatch.0001.slot5
+		trigger = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_5 } }
+		set_variable = { name = allywatch_selected value = scope:allywatch_slot5 }
+		trigger_event = allywatch.0002
+	}
+	option = {
+		name = allywatch.0001.slot6
+		trigger = { allywatch_slot_filled_trigger = { POS = allywatch_slot_pos_6 } }
+		set_variable = { name = allywatch_selected value = scope:allywatch_slot6 }
+		trigger_event = allywatch.0002
+	}
+
+	option = {
+		name = allywatch.0001.next_page
+		trigger = {
+			allywatch_slot_filled_trigger = { POS = allywatch_next_page_min }
+		}
+		change_variable = { name = allywatch_page add = 6 }
+		trigger_event = allywatch.0001
+	}
+
+	# Wiping the lists outright. Looping the watch list and clearing per ruler put
+	# the effect in the iterated character's scope, where these variables do not live.
+	option = {
+		name = allywatch.0001.clear_all
+		clear_variable_list = allywatch_thr_0
+		clear_variable_list = allywatch_thr_1
+		clear_variable_list = allywatch_thr_2
+		clear_variable_list = allywatch_thr_3
+		clear_variable_list = allywatch_thr_4
+		clear_variable_list = allywatch_thr_5
+		clear_variable_list = allywatch_thr_6
+		clear_variable_list = allywatch_thr_7
+		clear_variable_list = allywatch_thr_8
+		clear_variable_list = allywatch_tracked
+		set_variable = { name = allywatch_page value = 0 }
+	}
+
+	option = {
+		name = allywatch.0001.close
+		set_variable = { name = allywatch_page value = 0 }
+	}
+}
+
+# Submenu for one watched ruler. The selection travels in a variable so it survives
+# the hop between events, and is mirrored into a saved scope because localization
+# can read scopes but not variables.
+allywatch.0002 = {
+	type = character_event
+	title = allywatch.0002.t
+	# One branch per rung, each with its number written out. Reading the level through
+	# a script value does not work here: GetPlayer.MakeScope builds a fresh scope that
+	# does not carry this event's saved scopes, so every threshold rendered as -1.
+	desc = {
+		desc = allywatch.0002.desc_intro
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					NOT = { allywatch_has_threshold_trigger = { TARGET = var:allywatch_selected } }
+				}
+				desc = allywatch.0002.desc_thr_none
+			}
+			triggered_desc = {
+				trigger = { is_target_in_variable_list = { name = allywatch_thr_0 target = var:allywatch_selected } }
+				desc = allywatch.0002.desc_thr_0
+			}
+			triggered_desc = {
+				trigger = { is_target_in_variable_list = { name = allywatch_thr_1 target = var:allywatch_selected } }
+				desc = allywatch.0002.desc_thr_1
+			}
+			triggered_desc = {
+				trigger = { is_target_in_variable_list = { name = allywatch_thr_2 target = var:allywatch_selected } }
+				desc = allywatch.0002.desc_thr_2
+			}
+			triggered_desc = {
+				trigger = { is_target_in_variable_list = { name = allywatch_thr_3 target = var:allywatch_selected } }
+				desc = allywatch.0002.desc_thr_3
+			}
+			triggered_desc = {
+				trigger = { is_target_in_variable_list = { name = allywatch_thr_4 target = var:allywatch_selected } }
+				desc = allywatch.0002.desc_thr_4
+			}
+			triggered_desc = {
+				trigger = { is_target_in_variable_list = { name = allywatch_thr_5 target = var:allywatch_selected } }
+				desc = allywatch.0002.desc_thr_5
+			}
+			triggered_desc = {
+				trigger = { is_target_in_variable_list = { name = allywatch_thr_6 target = var:allywatch_selected } }
+				desc = allywatch.0002.desc_thr_6
+			}
+			triggered_desc = {
+				trigger = { is_target_in_variable_list = { name = allywatch_thr_7 target = var:allywatch_selected } }
+				desc = allywatch.0002.desc_thr_7
+			}
+			desc = allywatch.0002.desc_thr_8
+		}
+	}
+	theme = diplomacy
+
+	left_portrait = {
+		character = scope:allywatch_watched
+		animation = personality_bold
+	}
+
+	immediate = {
+		var:allywatch_selected = { save_scope_as = allywatch_watched }
+	}
+
+	# Straight to the setting people actually want. Walking down a ladder from the
+	# loud end took nine clicks to reach this, and the rungs above 4 or so do
+	# nothing for a ruler who never had that many allies to begin with.
+	option = {
+		name = allywatch.0002.set_quietest
+		trigger = {
+			NOT = { allywatch_has_threshold_trigger = { TARGET = var:allywatch_selected } }
+		}
+		allywatch_set_threshold_effect = {
+			TARGET = var:allywatch_selected
+			LEVEL = 0
+		}
+		trigger_event = allywatch.0002
+	}
+
+	# Stepping is only for the values in between. Quieter comes first: it is the
+	# direction people reach for, the same one the entry above jumps straight to.
+	# Hidden at the bottom, where nothing short of total isolation is reported.
+	option = {
+		name = allywatch.0002.lower
+		trigger = {
+			allywatch_has_threshold_trigger = { TARGET = var:allywatch_selected }
+			NOT = {
+				is_target_in_variable_list = {
+					name = allywatch_thr_0
+					target = var:allywatch_selected
+				}
+			}
+		}
+		allywatch_threshold_down_effect = { TARGET = var:allywatch_selected }
+		trigger_event = allywatch.0002
+	}
+
+	# Hidden at the top of the ladder, where reporting is already as early as it gets.
+	option = {
+		name = allywatch.0002.raise
+		trigger = {
+			allywatch_has_threshold_trigger = { TARGET = var:allywatch_selected }
+			NOT = {
+				is_target_in_variable_list = {
+					name = allywatch_thr_8
+					target = var:allywatch_selected
+				}
+			}
+		}
+		allywatch_threshold_up_effect = { TARGET = var:allywatch_selected }
+		trigger_event = allywatch.0002
+	}
+
+	# Back to hearing everything, also in one click from wherever you are.
+	option = {
+		name = allywatch.0002.clear
+		trigger = {
+			allywatch_has_threshold_trigger = { TARGET = var:allywatch_selected }
+		}
+		allywatch_clear_threshold_effect = { TARGET = var:allywatch_selected }
+		trigger_event = allywatch.0002
+	}
+
+	option = {
+		name = allywatch.0002.untrack
+		allywatch_untrack_effect = { TARGET = var:allywatch_selected }
+		remove_variable = allywatch_selected
+		if = {
+			limit = { allywatch_is_watching_trigger = yes }
+			trigger_event = allywatch.0001
+		}
+	}
+
+	option = {
+		name = allywatch.0002.back
+		trigger_event = allywatch.0001
+	}
+}
