@@ -69,5 +69,8 @@ on_death = {
 allywatch_on_death = {
 	effect = {
 		allywatch_notify_death_effect = yes
+		# A dying player leaves every variable on the corpse, so the watch list has
+		# to be handed to whoever they carry on as.
+		allywatch_carry_lists_to_heir_effect = yes
 	}
 }

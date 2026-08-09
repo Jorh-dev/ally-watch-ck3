@@ -89,8 +89,10 @@ They are rare and always worth knowing.
 
 ### Sound and where notifications appear
 
-Handled by the game's own **Settings → Message Settings → Ally Watch**. Each of the five
-notification types is listed separately and can be set to:
+Handled by the game's own **Message Settings** window — press **M**, or use the Message
+Settings button on the HUD. It is a window of its own, not a page inside Settings. Look for
+the **Ally Watch** group. Each of the four notification types is listed separately and can
+be set to:
 
 - **Toast** — pops up on screen with a sound
 - **Feed** — slides quietly into the message list, no interruption
@@ -98,6 +100,10 @@ notification types is listed separately and can be set to:
 
 So if you want silence except for the important one, set *Watched ruler loses an ally* to
 Feed and leave *Watched ruler has no allies left* on Toast.
+
+The Alliance Status panel has a group of its own, **Ally Watch - Panel**, because it is not
+a notification — it is the answer to a click. Silencing the notifications therefore does not
+also silence the panel.
 
 ---
 
@@ -124,6 +130,8 @@ and you will not be able to join each other.
   Status panel cannot show you history from before that — the game does not keep it.
 - The broken list remembers the last five.
 - The watch list has no size limit; the panel shows six at a time with a next-page button.
+- **Your watch list and thresholds carry over to your heir.** When your character dies you
+  keep watching everyone you were watching, at the same settings.
 - Like any mod, this disables achievements in Ironman.
 
 ## Reporting a problem

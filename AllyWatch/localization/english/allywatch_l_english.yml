@@ -84,6 +84,7 @@
  #############################
  message_filter_allywatch_report:0 "Alliance status panel"
  message_group_type_allywatch:0 "Ally Watch"
+ message_group_type_allywatch_panel:0 "Ally Watch - Panel"
  message_filter_allywatch_ally_lost:0 "Watched ruler loses an ally"
  message_filter_allywatch_no_allies:0 "Watched ruler has no allies left"
  message_filter_allywatch_ally_gained:0 "Watched ruler gains an ally"

@@ -364,3 +364,56 @@ allywatch_notify_death_effect = {
 		}
 	}
 }
+
+# --- Succession -------------------------------------------------------------
+# Every list in this file lives on the player's CURRENT character. When a player
+# dies the game hands them their heir but leaves the variables behind on the
+# corpse, so without this the whole watch list and every threshold quietly vanish
+# once a generation - and because allywatch_list_interaction is only shown while
+# the list is non-empty, the menu entry disappears with them, leaving no trace
+# that anything was lost.
+#
+# player_heir is what vanilla's own on_death uses for the character a player
+# continues as (see common/on_action/death.txt).
+
+allywatch_carry_one_list_effect = {
+	# $LIST$ = variable list to carry over, $TO$ = scope of the successor
+	# A list never written to does not exist at all, hence the guard.
+	if = {
+		limit = { has_variable_list = $LIST$ }
+		every_in_list = {
+			variable = $LIST$
+			save_temporary_scope_as = allywatch_carried
+			$TO$ = {
+				add_to_variable_list = {
+					name = $LIST$
+					target = scope:allywatch_carried
+				}
+			}
+		}
+	}
+}
+
+# Called from on_death, where root is the dying character.
+# Thresholds travel with the watch list; a carried-over ruler the player had
+# silenced should stay silenced.
+allywatch_carry_lists_to_heir_effect = {
+	if = {
+		limit = {
+			is_ai = no
+			exists = player_heir
+			allywatch_is_watching_trigger = yes
+		}
+		player_heir = { save_scope_as = allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_tracked TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_0 TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_1 TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_2 TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_3 TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_4 TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_5 TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_6 TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_7 TO = scope:allywatch_successor }
+		allywatch_carry_one_list_effect = { LIST = allywatch_thr_8 TO = scope:allywatch_successor }
+	}
+}

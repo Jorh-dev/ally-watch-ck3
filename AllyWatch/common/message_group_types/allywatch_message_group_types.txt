@@ -3,3 +3,12 @@
 allywatch = {
 	sort_order = 296
 }
+
+# The Alliance Status panel is not a notification - it is the answer to a click.
+# Sharing a group with the four toasts meant that a player who silenced the
+# notifications also silenced the panel, and the menu entry then did nothing at
+# all with no way to connect that to a setting. Its own group keeps the two
+# decisions separate.
+allywatch_panel = {
+	sort_order = 295
+}

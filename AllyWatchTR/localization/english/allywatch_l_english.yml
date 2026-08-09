@@ -84,6 +84,7 @@
  #############################
  message_filter_allywatch_report:0 "Müttefik durumu paneli"
  message_group_type_allywatch:0 "Müttefik Gözcüsü"
+ message_group_type_allywatch_panel:0 "Müttefik Gözcüsü - Panel"
  message_filter_allywatch_ally_lost:0 "Takip edilen hükümdar müttefik kaybetti"
  message_filter_allywatch_no_allies:0 "Takip edilen hükümdarın hiç müttefiği kalmadı"
  message_filter_allywatch_ally_gained:0 "Takip edilen hükümdar yeni müttefik edindi"
