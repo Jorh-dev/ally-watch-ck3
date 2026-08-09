@@ -1,0 +1,51 @@
+# Same-key on_actions in separate files get merged, so nothing vanilla is overwritten.
+# scope:first / scope:second are unordered, hence every check runs both ways.
+
+# Alliance formed.
+on_alliance_added = {
+	effect = {
+		allywatch_notify_ally_gained_effect = {
+			WATCHED = scope:first
+			OTHER = scope:second
+		}
+		allywatch_notify_ally_gained_effect = {
+			WATCHED = scope:second
+			OTHER = scope:first
+		}
+	}
+}
+
+# Alliance ended because its underlying reason went away (marriage dissolved, ally died, ...).
+on_alliance_removed = {
+	effect = {
+		allywatch_notify_ally_lost_effect = {
+			WATCHED = scope:first
+			OTHER = scope:second
+		}
+		allywatch_notify_ally_lost_effect = {
+			WATCHED = scope:second
+			OTHER = scope:first
+		}
+	}
+}
+
+# Alliance actively broken by one of the parties.
+on_alliance_broken = {
+	effect = {
+		allywatch_notify_ally_lost_effect = {
+			WATCHED = scope:first
+			OTHER = scope:second
+		}
+		allywatch_notify_ally_lost_effect = {
+			WATCHED = scope:second
+			OTHER = scope:first
+		}
+	}
+}
+
+# root = the dying character.
+on_death = {
+	effect = {
+		allywatch_notify_death_effect = yes
+	}
+}

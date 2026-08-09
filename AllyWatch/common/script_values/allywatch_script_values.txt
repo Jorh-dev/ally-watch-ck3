@@ -1,0 +1,6 @@
+# Ally count of the scoped character, used in the notification texts.
+allywatch_ally_count = {
+	every_ally = {
+		add = 1
+	}
+}

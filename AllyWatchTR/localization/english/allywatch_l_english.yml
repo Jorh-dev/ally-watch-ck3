@@ -1,0 +1,54 @@
+﻿l_english:
+
+ #############################
+ ### Karakter etkileşimleri
+ #############################
+ allywatch_track_interaction:0 "Takip Et"
+ allywatch_track_interaction_desc:0 "Bu hükümdarı takip listene ekler. Müttefik kaybettiğinde, yeni müttefik edindiğinde veya öldüğünde haber verilir."
+ allywatch_untrack_interaction:0 "Takibi Bırak"
+ allywatch_untrack_interaction_desc:0 "Bu hükümdarı takip listenden çıkarır. Artık hakkında bildirim gelmez."
+ allywatch_report_interaction:0 "Müttefik Durumu"
+ allywatch_report_interaction_desc:0 "Bu hükümdarın şu an kimlerle müttefik olduğunu ve sen takipteyken hangi ittifaklarının bozulduğunu gösterir."
+
+ allywatch_track_started_toast:0 "Takibe Alındı"
+ allywatch_track_started_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] müttefik kaybettiğinde, yeni müttefik edindiğinde veya öldüğünde haber verilecek.\nŞu anda #V [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#! müttefiği var."
+ allywatch_track_stopped_toast:0 "Takip Bırakıldı"
+ allywatch_track_stopped_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] takip listenden çıkarıldı."
+
+ #############################
+ ### Bildirimler
+ #############################
+ allywatch_msg_ally_lost:0 "Müttefik Kaybetti: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
+ allywatch_msg_ally_lost_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] ile [RIGHT_CHARACTER.GetUINameNoTooltip] arasındaki ittifak sona erdi.\nKalan müttefik sayısı: #V [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
+
+ allywatch_msg_no_allies:0 "Hiç Müttefiği Kalmadı: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
+ allywatch_msg_no_allies_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] son müttefiğini de kaybetti: [RIGHT_CHARACTER.GetUINameNoTooltip]. Artık tek başına.\n#P Savaşa çağırabileceği kimse yok.#!"
+
+ allywatch_msg_ally_gained:0 "Yeni Müttefik: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
+ allywatch_msg_ally_gained_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip], [RIGHT_CHARACTER.GetUINameNoTooltip] ile ittifak kurdu.\nGüncel müttefik sayısı: #N [LEFT_CHARACTER.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
+
+ allywatch_msg_death:0 "Takip Edilen Hükümdar Öldü: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
+ allywatch_msg_death_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] [LEFT_CHARACTER.GetAge] yaşında öldü. Tüm ittifakları da onunla birlikte sona erdi.\nYerine [RIGHT_CHARACTER.GetUINameNoTooltip] geçti.\n#low Takip listenden çıkarıldı. Devam etmek istersen halefini ayrıca takibe alabilirsin.#!"
+
+ allywatch_msg_death_no_heir:0 "Takip Edilen Hükümdar Öldü: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
+ allywatch_msg_death_no_heir_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] [LEFT_CHARACTER.GetAge] yaşında, ardında halef bırakmadan öldü. Tüm ittifakları da onunla birlikte sona erdi.\n#low Takip listenden çıkarıldı.#!"
+
+ #############################
+ ### Müttefik durumu paneli
+ #############################
+ allywatch_msg_report:0 "@alliance_icon! Müttefik Durumu: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
+ allywatch_report_allies_header:0 "#bold Şu an müttefik olduğu kişiler:#!"
+ allywatch_report_ally_line:0 "  @alliance_icon! #P [THIS.GetShortUINameNoTooltip]#!"
+ allywatch_report_no_allies:0 "#bold Hiç müttefiği yok.#! #P Tek başına.#!"
+ allywatch_report_broken_header:0 "\n#bold Sen takipteyken ittifakı bozulanlar:#!"
+ allywatch_report_broken_line:0 "  @war_icon! #N [THIS.GetShortUINameNoTooltip]#!"
+
+ #############################
+ ### Mesaj ayarları
+ #############################
+ message_filter_allywatch_report:0 "Müttefik durumu paneli"
+ message_group_type_allywatch:0 "Müttefik Gözcüsü"
+ message_filter_allywatch_ally_lost:0 "Takip edilen hükümdar müttefik kaybetti"
+ message_filter_allywatch_no_allies:0 "Takip edilen hükümdarın hiç müttefiği kalmadı"
+ message_filter_allywatch_ally_gained:0 "Takip edilen hükümdar yeni müttefik edindi"
+ message_filter_allywatch_death:0 "Takip edilen hükümdar öldü"

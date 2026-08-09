@@ -1,0 +1,132 @@
+# Portrait right-click menu. Free, auto-accepted, recipient is never notified.
+
+allywatch_track_interaction = {
+	category = interaction_category_diplomacy
+	icon = alliance
+	interface_priority = 50
+
+	desc = allywatch_track_interaction_desc
+
+	use_diplomatic_range = no			# a target on the far side of the map can be watched
+	auto_accept = yes
+	popup_on_receive = no
+	needs_recipient_to_open = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+			is_alive = yes
+		}
+		scope:actor != scope:recipient
+		scope:recipient = {
+			is_landed = yes
+		}
+		NOT = {
+			scope:actor = {
+				is_target_in_variable_list = {
+					name = allywatch_tracked
+					target = scope:recipient
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			is_alive = yes
+		}
+	}
+
+	on_accept = {
+		scope:actor = {
+			# Outside the toast - must not depend on the toast being enabled.
+			add_to_variable_list = {
+				name = allywatch_tracked
+				target = scope:recipient
+			}
+			send_interface_toast = {
+				title = allywatch_track_started_toast
+				left_icon = scope:recipient
+				custom_tooltip = allywatch_track_started_toast_tt
+			}
+		}
+	}
+}
+
+# Not gated on tracking - works on any ruler.
+allywatch_report_interaction = {
+	category = interaction_category_diplomacy
+	icon = scroll_scales
+	interface_priority = 48
+
+	desc = allywatch_report_interaction_desc
+
+	use_diplomatic_range = no
+	auto_accept = yes
+	popup_on_receive = no
+	needs_recipient_to_open = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+			is_alive = yes
+		}
+		scope:actor != scope:recipient
+		scope:recipient = {
+			is_landed = yes
+		}
+	}
+
+	is_valid_showing_failures_only = {
+	}
+
+	on_accept = {
+		allywatch_show_report_effect = {
+			TARGET = scope:recipient
+		}
+	}
+}
+
+allywatch_untrack_interaction = {
+	category = interaction_category_diplomacy
+	icon = alliance
+	interface_priority = 49
+
+	desc = allywatch_untrack_interaction_desc
+
+	use_diplomatic_range = no
+	auto_accept = yes
+	popup_on_receive = no
+	needs_recipient_to_open = no
+	ignores_pending_interaction_block = yes
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+			is_alive = yes
+			is_target_in_variable_list = {
+				name = allywatch_tracked
+				target = scope:recipient
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+	}
+
+	on_accept = {
+		scope:actor = {
+			remove_list_variable = {
+				name = allywatch_tracked
+				target = scope:recipient
+			}
+			send_interface_toast = {
+				title = allywatch_track_stopped_toast
+				left_icon = scope:recipient
+				custom_tooltip = allywatch_track_stopped_toast_tt
+			}
+		}
+	}
+}

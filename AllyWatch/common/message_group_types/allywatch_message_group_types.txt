@@ -1,0 +1,5 @@
+# Own section in Message Settings. Loc key = "message_group_type_" + <key>.
+# 296 sits just under Character (300).
+allywatch = {
+	sort_order = 296
+}

@@ -1,0 +1,24 @@
+# The watch list lives only on the watching player, so there is one source of
+# truth and no reverse index to keep in sync.
+allywatch_is_tracked_trigger = {
+	# $CHARACTER$ = character to check (must be a saved scope, not "this")
+	any_player = {
+		is_target_in_variable_list = {
+			name = allywatch_tracked
+			target = $CHARACTER$
+		}
+	}
+}
+
+# on_alliance_broken and on_alliance_removed can both fire for one event, so the
+# pair gets stamped for a day. Separate var per direction, otherwise a "gained"
+# stamp would swallow a "lost" notification.
+allywatch_is_new_change_trigger = {
+	# $WATCHED$ = tracked character, $OTHER$ = other party, $VARNAME$ = stamp variable
+	$WATCHED$ = {
+		NAND = {
+			has_variable = $VARNAME$
+			var:$VARNAME$ = $OTHER$
+		}
+	}
+}

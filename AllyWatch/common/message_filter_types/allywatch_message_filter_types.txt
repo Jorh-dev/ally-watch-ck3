@@ -1,0 +1,32 @@
+# Loc key = "message_filter_" + <key>.
+# No auto_pause anywhere - pausing is disruptive in multiplayer.
+
+allywatch_report = {
+	display = popup
+	group = allywatch
+	sort_order = 50
+}
+
+allywatch_ally_lost = {
+	display = toast
+	group = allywatch
+	sort_order = 40
+}
+
+allywatch_no_allies = {
+	display = toast
+	group = allywatch
+	sort_order = 30
+}
+
+allywatch_ally_gained = {
+	display = toast
+	group = allywatch
+	sort_order = 20
+}
+
+allywatch_death = {
+	display = toast
+	group = allywatch
+	sort_order = 10
+}

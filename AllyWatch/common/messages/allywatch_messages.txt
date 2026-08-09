@@ -1,0 +1,47 @@
+# Message key = title loc key. LEFT_CHARACTER = tracked character (left_icon),
+# RIGHT_CHARACTER = ex-ally / new ally / heir (right_icon).
+# Style is from the watching player's side: target losing an ally is good news.
+
+allywatch_msg_ally_lost = {
+	icon = "alliance"
+	desc = allywatch_msg_ally_lost_desc
+	style = good
+	message_filter_type = allywatch_ally_lost
+}
+
+allywatch_msg_no_allies = {
+	icon = "alliance"
+	desc = allywatch_msg_no_allies_desc
+	style = good
+	message_filter_type = allywatch_no_allies
+}
+
+allywatch_msg_ally_gained = {
+	icon = "alliance"
+	desc = allywatch_msg_ally_gained_desc
+	style = bad
+	message_filter_type = allywatch_ally_gained
+}
+
+allywatch_msg_death = {
+	icon = "death_natural"
+	desc = allywatch_msg_death_desc
+	style = neutral
+	message_filter_type = allywatch_death
+}
+
+# event_message_effect = "$EFFECT$", so the body is whatever the sender renders.
+allywatch_msg_report = {
+	icon = "alliance"
+	desc = event_message_effect
+	style = neutral
+	display = popup
+	message_filter_type = allywatch_report
+}
+
+allywatch_msg_death_no_heir = {
+	icon = "death_natural"
+	desc = allywatch_msg_death_no_heir_desc
+	style = neutral
+	message_filter_type = allywatch_death
+}

@@ -1,0 +1,233 @@
+# Every effect bails out when nobody is watching the character, so alliance churn
+# across the rest of the map costs one list check.
+
+# Stamps the watched character so the same event is not reported twice.
+allywatch_mark_change_effect = {
+	# $WATCHED$ / $OTHER$ / $VARNAME$
+	$WATCHED$ = {
+		set_variable = {
+			name = $VARNAME$
+			value = $OTHER$
+			days = 1
+		}
+	}
+}
+
+# The watched character lost an ally. If it was their last one, send the louder message.
+allywatch_notify_ally_lost_effect = {
+	# $WATCHED$ = tracked candidate, $OTHER$ = the ally they just lost
+	if = {
+		limit = {
+			allywatch_is_tracked_trigger = { CHARACTER = $WATCHED$ }
+			allywatch_is_new_change_trigger = {
+				WATCHED = $WATCHED$
+				OTHER = $OTHER$
+				VARNAME = allywatch_last_lost
+			}
+		}
+		allywatch_mark_change_effect = {
+			WATCHED = $WATCHED$
+			OTHER = $OTHER$
+			VARNAME = allywatch_last_lost
+		}
+		every_player = {
+			limit = {
+				is_target_in_variable_list = {
+					name = allywatch_tracked
+					target = $WATCHED$
+				}
+			}
+			if = {
+				limit = {
+					$WATCHED$ = { any_ally = { always = yes } }
+				}
+				send_interface_message = {
+					type = allywatch_msg_ally_lost
+					left_icon = $WATCHED$
+					right_icon = $OTHER$
+				}
+			}
+			else = {
+				send_interface_message = {
+					type = allywatch_msg_no_allies
+					left_icon = $WATCHED$
+					right_icon = $OTHER$
+				}
+			}
+		}
+		allywatch_record_ex_ally_effect = {
+			WATCHED = $WATCHED$
+			OTHER = $OTHER$
+		}
+	}
+}
+
+# Feeds the "broken alliances" section of the report. Only called for tracked
+# characters, so nothing is written to rulers nobody watches.
+allywatch_record_ex_ally_effect = {
+	# $WATCHED$ = tracked character, $OTHER$ = the ally they just lost
+	$WATCHED$ = {
+		# Remove first so a repeat break moves the entry instead of duplicating it.
+		remove_list_variable = {
+			name = allywatch_ex_allies
+			target = $OTHER$
+		}
+		add_to_variable_list = {
+			name = allywatch_ex_allies
+			target = $OTHER$
+		}
+		# Cap the history at 5 so the list cannot grow without bound over a long game.
+		while = {
+			limit = {
+				variable_list_size = {
+					name = allywatch_ex_allies
+					value > 5
+				}
+			}
+			ordered_in_list = {
+				variable = allywatch_ex_allies
+				position = 0
+				save_temporary_scope_as = allywatch_oldest_ex_ally
+			}
+			remove_list_variable = {
+				name = allywatch_ex_allies
+				target = scope:allywatch_oldest_ex_ally
+			}
+		}
+	}
+}
+
+# The watched character gained an ally - bad news for whoever is watching them.
+allywatch_notify_ally_gained_effect = {
+	# $WATCHED$ = tracked candidate, $OTHER$ = their new ally
+	if = {
+		limit = {
+			allywatch_is_tracked_trigger = { CHARACTER = $WATCHED$ }
+			allywatch_is_new_change_trigger = {
+				WATCHED = $WATCHED$
+				OTHER = $OTHER$
+				VARNAME = allywatch_last_gained
+			}
+		}
+		allywatch_mark_change_effect = {
+			WATCHED = $WATCHED$
+			OTHER = $OTHER$
+			VARNAME = allywatch_last_gained
+		}
+		every_player = {
+			limit = {
+				is_target_in_variable_list = {
+					name = allywatch_tracked
+					target = $WATCHED$
+				}
+			}
+			send_interface_message = {
+				type = allywatch_msg_ally_gained
+				left_icon = $WATCHED$
+				right_icon = $OTHER$
+			}
+		}
+		# Allied again: drop them from the broken-alliance history so the report
+		# never lists the same person as both a current and a former ally.
+		$WATCHED$ = {
+			remove_list_variable = {
+				name = allywatch_ex_allies
+				target = $OTHER$
+			}
+		}
+	}
+}
+
+# Status panel. The message type uses desc = event_message_effect, so what this
+# block renders becomes the popup body. show_as_tooltip renders without executing,
+# so the loops print a line per ally and change nothing.
+allywatch_show_report_effect = {
+	# $TARGET$ = the ruler being inspected
+	$TARGET$ = { save_scope_as = allywatch_report_target }
+	scope:actor = {
+		send_interface_message = {
+			type = allywatch_msg_report
+			left_icon = scope:allywatch_report_target
+			show_as_tooltip = {
+				if = {
+					limit = {
+						scope:allywatch_report_target = { any_ally = { always = yes } }
+					}
+					custom_tooltip = allywatch_report_allies_header
+					scope:allywatch_report_target = {
+						# Inside the loop the line's loc reads THIS, which is the
+						# current ally - same pattern vanilla uses for MIGRATION_CB_TITLE.
+						every_ally = {
+							custom_tooltip = allywatch_report_ally_line
+						}
+					}
+				}
+				else = {
+					custom_tooltip = allywatch_report_no_allies
+				}
+
+				# Only populated for characters that were on a watch list when the
+				# alliance broke, so this section is simply absent for everyone else.
+				if = {
+					limit = {
+						scope:allywatch_report_target = {
+							variable_list_size = {
+								name = allywatch_ex_allies
+								value > 0
+							}
+						}
+					}
+					custom_tooltip = allywatch_report_broken_header
+					scope:allywatch_report_target = {
+						every_in_list = {
+							variable = allywatch_ex_allies
+							custom_tooltip = allywatch_report_broken_line
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Called from on_death only, where root is the dying character.
+# Reports the death, names the successor, then drops the dead character from
+# every watch list so no variable list keeps pointing at a corpse.
+allywatch_notify_death_effect = {
+	if = {
+		limit = {
+			allywatch_is_tracked_trigger = { CHARACTER = root }
+		}
+		save_scope_as = allywatch_dead
+		if = {
+			limit = { exists = primary_heir }
+			primary_heir = { save_scope_as = allywatch_heir }
+		}
+		every_player = {
+			limit = {
+				is_target_in_variable_list = {
+					name = allywatch_tracked
+					target = scope:allywatch_dead
+				}
+			}
+			if = {
+				limit = { exists = scope:allywatch_heir }
+				send_interface_message = {
+					type = allywatch_msg_death
+					left_icon = scope:allywatch_dead
+					right_icon = scope:allywatch_heir
+				}
+			}
+			else = {
+				send_interface_message = {
+					type = allywatch_msg_death_no_heir
+					left_icon = scope:allywatch_dead
+				}
+			}
+			remove_list_variable = {
+				name = allywatch_tracked
+				target = scope:allywatch_dead
+			}
+		}
+	}
+}
