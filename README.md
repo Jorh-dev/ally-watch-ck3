@@ -131,3 +131,8 @@ and you will not be able to join each other.
 Open an issue with what you did, what you expected, and what happened instead. If the game
 logged anything, `Documents/Paradox Interactive/Crusader Kings III/logs/error.log` is the
 useful file.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Translate it, fork it, fix it, fold it into your own mod;
+just keep the copyright notice with the source.
