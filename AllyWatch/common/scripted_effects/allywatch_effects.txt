@@ -280,40 +280,39 @@ allywatch_show_report_effect = {
 		send_interface_message = {
 			type = allywatch_msg_report
 			left_icon = scope:allywatch_report_target
+			# Everything below runs inside the WATCHED ruler's scope, never the reader's.
+			# show_as_tooltip renders each line under a portrait of whichever character
+			# its scope is in, so a header written out here came out under the reader's
+			# own face with vanilla's "effects on me" caption - the panel appeared to be
+			# about the player rather than the ruler they had just right-clicked.
 			show_as_tooltip = {
-				if = {
-					limit = {
-						scope:allywatch_report_target = { any_ally = { always = yes } }
-					}
-					custom_tooltip = allywatch_report_allies_header
-					scope:allywatch_report_target = {
+				scope:allywatch_report_target = {
+					if = {
+						limit = { any_ally = { always = yes } }
+						custom_tooltip = allywatch_report_allies_header
 						# Inside the loop the line's loc reads THIS, which is the
 						# current ally - same pattern vanilla uses for MIGRATION_CB_TITLE.
 						every_ally = {
 							custom_tooltip = allywatch_report_ally_line
 						}
 					}
-				}
-				else = {
-					custom_tooltip = allywatch_report_no_allies
-				}
+					else = {
+						custom_tooltip = allywatch_report_no_allies
+					}
 
-				# Only populated for characters that were on a watch list when the
-				# alliance broke, so this section is simply absent for everyone else.
-				# has_variable_list first: a list never written to does not exist,
-				# and asking for its size is an error rather than a zero.
-				if = {
-					limit = {
-						scope:allywatch_report_target = {
+					# Only populated for characters that were on a watch list when the
+					# alliance broke, so this section is simply absent for everyone else.
+					# has_variable_list first: a list never written to does not exist,
+					# and asking for its size is an error rather than a zero.
+					if = {
+						limit = {
 							has_variable_list = allywatch_ex_allies
 							variable_list_size = {
 								name = allywatch_ex_allies
 								value > 0
 							}
 						}
-					}
-					custom_tooltip = allywatch_report_broken_header
-					scope:allywatch_report_target = {
+						custom_tooltip = allywatch_report_broken_header
 						every_in_list = {
 							variable = allywatch_ex_allies
 							custom_tooltip = allywatch_report_broken_line
