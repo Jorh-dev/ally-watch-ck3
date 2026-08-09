@@ -1,58 +1,55 @@
-[h1]Ally Watch[/h1]
+SHORT DESCRIPTION (for the 10-200 character field)
+--------------------------------------------------
+Watch other rulers' alliances. Get told the moment a marked ruler loses an ally, runs out of allies, gains one, or dies.
 
-[b]Keep an eye on other rulers' alliances.[/b]
+
+DESCRIPTION (large box - plain text, the editor does not read BBCode)
+--------------------------------------------------------------------
+Keep an eye on other rulers' alliances.
 
 Before you declare war, the question that actually matters is who your target can call in. CK3 never tells you when that changes. You open their window, count the allies, close it, and do it again next year in case something moved.
 
-Ally Watch does the counting. Mark a ruler, and the game tells you the moment their alliances shift — including the moment they run out of allies entirely.
+Ally Watch does the counting. Mark a ruler, and the game tells you the moment their alliances shift, including the moment they run out of allies entirely.
 
-[hr][/hr]
-[h2]How to use it[/h2]
+How to use it
 
-Everything is in the [b]right-click menu on a character portrait[/b], under Diplomacy. No new buttons, no new tabs.
+Everything is in the right-click menu on a character portrait, under Diplomacy. No new buttons, no new tabs.
 
-[list]
-[*][b]Watch This Ruler[/b] — right-click their portrait. Works at any distance, on as many rulers as you like.
-[*][b]My Watch List[/b] — right-click [b]your own[/b] portrait. This is the easy one to miss. The entry only shows up while you are watching someone, so an empty list means no line at all.
-[*][b]Alliance Status[/b] — right-click any portrait to see their current allies, plus any alliances of theirs that broke while you were watching. Works on anyone, watched or not.
-[/list]
+- Watch This Ruler: right-click their portrait. Works at any distance, on as many rulers as you like.
+- My Watch List: right-click YOUR OWN portrait. This is the easy one to miss. The entry only shows up while you are watching someone, so an empty list means no line at all.
+- Alliance Status: right-click any portrait to see their current allies, plus any alliances of theirs that broke while you were watching. Works on anyone, watched or not.
 
-[h2]What you get told[/h2]
+What you get told
 
-[list]
-[*][b]Ally Lost[/b] — they lose one, and how many are left
-[*][b]No Allies Left[/b] — they just lost their last one. The one you are waiting for.
-[*][b]New Ally[/b] — they gained one. Bad news, marked as such.
-[*][b]Watched Ruler Died[/b] — with their age and successor
-[/list]
+- Ally Lost, with how many are left
+- No Allies Left, the one you are waiting for
+- New Ally, bad news and marked as such
+- Watched Ruler Died, with their age and successor
 
-The game is [b]never paused[/b] by any of this, on purpose — pausing in multiplayer stops the game for everybody.
+The game is never paused by any of this, on purpose. Pausing in multiplayer stops the game for everybody.
 
-[h2]Turning down the noise[/h2]
+Turning down the noise
 
 A ruler with five allies losing them one at a time means five notifications, and you probably only care about the last one.
 
-Open My Watch List, click the ruler, and hold the notifications back until they are down to whatever number you choose — or until they have nobody left at all. Every watched ruler is set separately, and [b]the setting is yours alone[/b]: in co-op your partner can watch the same ruler with a completely different setting.
+Open My Watch List, click the ruler, and hold the notifications back until they are down to whatever number you choose, or until they have nobody left at all. Every watched ruler is set separately, and the setting is yours alone: in co-op your partner can watch the same ruler with a completely different setting.
 
-Sound and placement are handled by the game's own Settings → Message Settings → Ally Watch, where each of the five notification types can be set to Toast, Feed or Never.
+Sound and placement are handled by the game's own Settings, Message Settings, Ally Watch, where each of the five notification types can be set to Toast, Feed or Never.
 
-[h2]Compatibility[/h2]
+Compatibility
 
-Script only. No interface files replaced, no vanilla files overwritten — it does not conflict with UI mods or other alliance mods.
+Script only. No interface files replaced, no vanilla files overwritten, so it does not conflict with UI mods or other alliance mods.
 
 Works in co-op. Notifications only reach the player watching that ruler. As with every CK3 mod, all players need an identical mod list.
 
-[h2]Good to know[/h2]
+Good to know
 
-[list]
-[*]Broken alliances are only recorded from the moment you start watching — the game keeps no history from before that.
-[*]The broken list remembers the last five.
-[*]Like any mod, this disables achievements in Ironman.
-[/list]
+- Broken alliances are only recorded from the moment you start watching. The game keeps no history from before that.
+- The broken list remembers the last five.
+- Like any mod, this disables achievements in Ironman.
 
-[h2]Turkish[/h2]
+Turkish
 
-A separate text-only submod translates the mod into Turkish. CK3 has no Turkish language slot, so it replaces the English strings — load it after the main mod. Ignore it if you play in English.
+A separate text-only submod translates the mod into Turkish. Load it after this one.
 
-[hr][/hr]
 Built for CK3 1.19.x (Scribe).

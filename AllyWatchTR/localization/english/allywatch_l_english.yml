@@ -13,7 +13,7 @@
  allywatch_report_interaction_desc:0 "Bu hükümdarın şu an kimlerle müttefik olduğunu ve sen takipteyken hangi ittifaklarının bozulduğunu gösterir."
 
  allywatch_track_started_toast:0 "Takibe Alındı"
- allywatch_track_started_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] müttefik kaybettiğinde, yeni müttefik edindiğinde veya öldüğünde haber verilecek.\n#low Kimlerle müttefik olduğunu görmek için portresinden Müttefik Durumu'nu aç.#!"
+ allywatch_track_started_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] müttefik kaybettiğinde, yeni müttefik edindiğinde veya öldüğünde haber verilecek."
  allywatch_track_stopped_toast:0 "Takip Bırakıldı"
  allywatch_track_stopped_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] takip listenden çıkarıldı."
 
@@ -73,8 +73,8 @@
  allywatch.0002.desc_thr_7:0 "Bildirim: #V 7 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
  allywatch.0002.desc_thr_8:0 "Bildirim: #V 8 veya daha az müttefiği kalınca#!.\nÜstündeki değişiklikler sessiz geçer."
  allywatch.0002.set_quietest:0 "Sadece hiç müttefiği kalmayınca haber ver"
- allywatch.0002.raise:0 "Bir müttefik erken haber ver"
- allywatch.0002.lower:0 "Bir müttefik geç haber ver"
+ allywatch.0002.raise:0 "Bir müttefik geç haber ver"
+ allywatch.0002.lower:0 "Bir müttefik erken haber ver"
  allywatch.0002.clear:0 "Yine her değişiklikte haber ver"
  allywatch.0002.untrack:0 "#N Takibi bırak#!"
  allywatch.0002.back:0 "Listeye dön"

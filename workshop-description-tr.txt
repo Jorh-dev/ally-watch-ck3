@@ -1,0 +1,51 @@
+KISA ACIKLAMA (10-200 karakter alanina)
+---------------------------------------
+Ally Watch modunun Türkçe metinleri. Takip ettiğin hükümdarların müttefikleri değiştiğinde haber verir. Ana moddan sonra yükleyin.
+
+
+ACIKLAMA (buyuk kutuya - duz metin, etiket yok)
+-----------------------------------------------
+Ally Watch modunun Türkçe çevirisi.
+
+Bu tek başına bir mod değil, sadece metinleri Türkçeleştirir. Çalışması için ana Ally Watch modu da gerekli ve bu mod listede ondan SONRA yüklenmeli.
+
+Ally Watch ne yapar:
+
+Savaş açmadan önce asıl önemli soru, hedefinin kimleri yardıma çağırabileceğidir. CK3 bunun değiştiğini hiçbir yerde söylemez; her seferinde karakter ekranını açıp müttefikleri saymak gerekir.
+
+Ally Watch bu saymayı senin yerine yapar. Bir hükümdarı işaretlersin, ittifakları değiştiği anda haber alırsın.
+
+Nasıl kullanılır:
+
+Her şey karakter portresine sağ tıklayınca çıkan menüde, Diplomasi başlığı altında.
+
+- Takip Et: hedefin portresine sağ tıkla. Mesafe sınırı yok, istediğin kadar hükümdar takip edebilirsin.
+- Takip Listem: KENDİ portrene sağ tıkla. Gözden kaçan yer burası. Kimseyi takip etmiyorsan bu satır hiç görünmez, mod bozuk değildir.
+- Müttefik Durumu: herhangi bir portreye sağ tıkla, o kişinin güncel müttefiklerini ve sen takipteyken bozulan ittifaklarını gösterir.
+
+Hangi bildirimler gelir:
+
+- Müttefik kaybetti, kaç tanesi kaldığıyla birlikte
+- Hiç müttefiği kalmadı, yani beklediğin an
+- Yeni müttefik edindi
+- Öldü, yaşı ve yerine geçen kişiyle
+
+Gürültüyü kısmak:
+
+Beş müttefiği olan biri teker teker kaybederken beş ayrı bildirim gelir, oysa çoğu zaman sadece sonuncusu ilgilendirir. Takip Listem'den kişiyi seçip bildirimi istediğin sayıya kadar erteleyebilirsin. Her hükümdar ayrı ayarlanır ve ayar sana özeldir; çok oyunculuda arkadaşın aynı kişiyi bambaşka bir ayarla takip edebilir.
+
+Ses ve bildirimlerin nerede çıkacağı oyunun kendi Ayarlar > Mesaj Ayarları > Müttefik Gözcüsü bölümünden ayarlanır.
+
+Oyunu hiçbir bildirim duraklatmaz, bu bilinçli bir tercih: çok oyunculuda duraklatma herkesi durdurur.
+
+Uyumluluk:
+
+Sadece script, hiçbir arayüz dosyası değiştirilmiyor, hiçbir vanilya dosyası ezilmiyor. Çok oyunculuda çalışır, bildirim sadece o kişiyi takip eden oyuncuya gider. Her CK3 modunda olduğu gibi tüm oyuncularda mod listesi birebir aynı olmalı.
+
+Bilinmesi gerekenler:
+
+- Bozulan ittifaklar ancak takibe aldığın andan itibaren kaydedilir, oyun daha öncesini tutmuyor.
+- Bozulan listesi son beşi hatırlar.
+- Her mod gibi bu da Ironman'de başarımları kapatır.
+
+CK3 1.19.x (Scribe) için.

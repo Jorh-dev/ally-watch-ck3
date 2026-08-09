@@ -228,8 +228,7 @@ allywatch.0002 = {
 		trigger_event = allywatch.0002
 	}
 
-	# Stepping is only for the values in between. Quieter comes first: it is the
-	# direction people reach for, the same one the entry above jumps straight to.
+	# Stepping is only for the values in between.
 	# Hidden at the bottom, where nothing short of total isolation is reported.
 	option = {
 		name = allywatch.0002.lower

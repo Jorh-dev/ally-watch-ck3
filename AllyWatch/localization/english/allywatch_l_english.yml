@@ -13,7 +13,7 @@
  allywatch_report_interaction_desc:0 "See who this ruler is allied with right now, and which alliances of theirs have fallen apart while you were watching."
 
  allywatch_track_started_toast:0 "Now Watching"
- allywatch_track_started_toast_tt:0 "You will be notified when [LEFT_CHARACTER.GetShortUINameNoTooltip] loses an ally, gains an ally, or dies.\n#low Open Alliance Status on their portrait to see who those allies are.#!"
+ allywatch_track_started_toast_tt:0 "You will be notified when [LEFT_CHARACTER.GetShortUINameNoTooltip] loses an ally, gains an ally, or dies."
  allywatch_track_stopped_toast:0 "No Longer Watching"
  allywatch_track_stopped_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] has been removed from your watch list."
 
@@ -73,8 +73,8 @@
  allywatch.0002.desc_thr_7:0 "Reporting: #V once they are down to 7 allies or fewer#!.\nAnything above that stays quiet."
  allywatch.0002.desc_thr_8:0 "Reporting: #V once they are down to 8 allies or fewer#!.\nAnything above that stays quiet."
  allywatch.0002.set_quietest:0 "Only tell me when they have no allies left"
- allywatch.0002.raise:0 "Report one ally earlier"
- allywatch.0002.lower:0 "Report one ally later"
+ allywatch.0002.raise:0 "Report one ally later"
+ allywatch.0002.lower:0 "Report one ally earlier"
  allywatch.0002.clear:0 "Go back to hearing every change"
  allywatch.0002.untrack:0 "#N Stop watching them#!"
  allywatch.0002.back:0 "Back to the list"
