@@ -276,6 +276,11 @@ allywatch_notify_ally_gained_effect = {
 allywatch_show_report_effect = {
 	# $TARGET$ = the ruler being inspected
 	$TARGET$ = { save_scope_as = allywatch_report_target }
+	# The reader is skipped in both lists below: being one of the target's own allies,
+	# they would otherwise turn up as a line reading "you", and the game groups lines
+	# by whose scope they are in, so that one line dragged the reader's portrait to the
+	# top of a panel that is supposed to be about somebody else.
+	scope:actor = { save_scope_as = allywatch_reader }
 	scope:actor = {
 		send_interface_message = {
 			type = allywatch_msg_report
@@ -293,6 +298,7 @@ allywatch_show_report_effect = {
 						# Inside the loop the line's loc reads THIS, which is the
 						# current ally - same pattern vanilla uses for MIGRATION_CB_TITLE.
 						every_ally = {
+							limit = { NOT = { this = scope:allywatch_reader } }
 							custom_tooltip = allywatch_report_ally_line
 						}
 					}
@@ -315,6 +321,7 @@ allywatch_show_report_effect = {
 						custom_tooltip = allywatch_report_broken_header
 						every_in_list = {
 							variable = allywatch_ex_allies
+							limit = { NOT = { this = scope:allywatch_reader } }
 							custom_tooltip = allywatch_report_broken_line
 						}
 					}
