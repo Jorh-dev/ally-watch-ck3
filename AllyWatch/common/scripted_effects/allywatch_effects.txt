@@ -153,9 +153,9 @@ allywatch_notify_ally_lost_effect = {
 			OTHER = $OTHER$
 			VARNAME = allywatch_last_lost
 		}
-		# The message text reads the ally count off this scope. LEFT_CHARACTER has no
-		# MakeScope, and using it there makes the whole string fail to build.
-		$WATCHED$ = { save_scope_as = allywatch_msg_char }
+		# The ally count in the message text comes from a customizable_localization on
+		# LEFT_CHARACTER, not from a saved scope: a message is rendered after the effect
+		# has finished, so nothing saved here would still be around.
 		every_player = {
 			limit = {
 				is_target_in_variable_list = {
@@ -246,7 +246,6 @@ allywatch_notify_ally_gained_effect = {
 			OTHER = $OTHER$
 			VARNAME = allywatch_last_gained
 		}
-		$WATCHED$ = { save_scope_as = allywatch_msg_char }
 		every_player = {
 			limit = {
 				is_target_in_variable_list = {

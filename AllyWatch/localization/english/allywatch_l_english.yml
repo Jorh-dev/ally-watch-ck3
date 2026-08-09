@@ -13,7 +13,7 @@
  allywatch_report_interaction_desc:0 "See who this ruler is allied with right now, and which alliances of theirs have fallen apart while you were watching."
 
  allywatch_track_started_toast:0 "Now Watching"
- allywatch_track_started_toast_tt:0 "You will be notified when [LEFT_CHARACTER.GetShortUINameNoTooltip] loses an ally, gains an ally, or dies."
+ allywatch_track_started_toast_tt:0 "You will be notified when this ruler loses an ally, gains an ally, or dies."
  allywatch_track_stopped_toast:0 "No Longer Watching"
  allywatch_track_stopped_toast_tt:0 "[LEFT_CHARACTER.GetShortUINameNoTooltip] has been removed from your watch list."
 
@@ -21,13 +21,13 @@
  ### Notifications
  #############################
  allywatch_msg_ally_lost:0 "Ally Lost: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
- allywatch_msg_ally_lost_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] is no longer allied with [RIGHT_CHARACTER.GetUINameNoTooltip].\nAllies remaining: #V [allywatch_msg_char.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
+ allywatch_msg_ally_lost_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] is no longer allied with [RIGHT_CHARACTER.GetUINameNoTooltip].\nAllies remaining: #V [LEFT_CHARACTER.Custom('AllyWatchGetAllyCountText')]#!"
 
  allywatch_msg_no_allies:0 "No Allies Left: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_msg_no_allies_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] has lost their last ally, [RIGHT_CHARACTER.GetUINameNoTooltip], and now stands alone.\n#P Nobody will be called to their defence.#!"
 
  allywatch_msg_ally_gained:0 "New Ally: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
- allywatch_msg_ally_gained_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] has formed an alliance with [RIGHT_CHARACTER.GetUINameNoTooltip].\nAllies now: #N [allywatch_msg_char.MakeScope.ScriptValue('allywatch_ally_count')|0]#!"
+ allywatch_msg_ally_gained_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] has formed an alliance with [RIGHT_CHARACTER.GetUINameNoTooltip].\nAllies now: #N [LEFT_CHARACTER.Custom('AllyWatchGetAllyCountText')]#!"
 
  allywatch_msg_death:0 "Watched Ruler Died: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_msg_death_desc:0 "[LEFT_CHARACTER.GetUINameNoTooltip] has died at the age of [LEFT_CHARACTER.GetAge]. Every alliance they held died with them.\nThe successor is [RIGHT_CHARACTER.GetUINameNoTooltip].\n#low Removed from your watch list. Watch the successor if you want to keep following them.#!"
@@ -78,6 +78,21 @@
  allywatch.0002.clear:0 "Go back to hearing every change"
  allywatch.0002.untrack:0 "#N Stop watching them#!"
  allywatch.0002.back:0 "Back to the list"
+
+ #############################
+ ### Ally count (customizable loc branches - language neutral)
+ #############################
+ allywatch_count_0:0 "0"
+ allywatch_count_1:0 "1"
+ allywatch_count_2:0 "2"
+ allywatch_count_3:0 "3"
+ allywatch_count_4:0 "4"
+ allywatch_count_5:0 "5"
+ allywatch_count_6:0 "6"
+ allywatch_count_7:0 "7"
+ allywatch_count_8:0 "8"
+ allywatch_count_9:0 "9"
+ allywatch_count_many:0 "10+"
 
  #############################
  ### Message settings

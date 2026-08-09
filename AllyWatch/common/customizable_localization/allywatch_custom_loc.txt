@@ -1,0 +1,58 @@
+﻿# Message descriptions cannot reach saved scopes: a message is rendered long after
+# the effect that sent it, so [allywatch_msg_char.MakeScope.ScriptValue(...)] printed
+# a literal ERROR into the notification. LEFT_CHARACTER survives, but vanilla never
+# calls MakeScope or Var on it and neither works here - Custom is the one door that
+# leads back into the character's scope, which is what this is for.
+#
+# Custom loc picks a fixed string per branch rather than printing a number, so the
+# ladder is spelled out the same way the threshold ladder is.
+
+AllyWatchGetAllyCountText = {
+	type = character
+
+	text = {
+		trigger = { allywatch_ally_count <= 0 }
+		localization_key = allywatch_count_0
+	}
+	text = {
+		trigger = { allywatch_ally_count = 1 }
+		localization_key = allywatch_count_1
+	}
+	text = {
+		trigger = { allywatch_ally_count = 2 }
+		localization_key = allywatch_count_2
+	}
+	text = {
+		trigger = { allywatch_ally_count = 3 }
+		localization_key = allywatch_count_3
+	}
+	text = {
+		trigger = { allywatch_ally_count = 4 }
+		localization_key = allywatch_count_4
+	}
+	text = {
+		trigger = { allywatch_ally_count = 5 }
+		localization_key = allywatch_count_5
+	}
+	text = {
+		trigger = { allywatch_ally_count = 6 }
+		localization_key = allywatch_count_6
+	}
+	text = {
+		trigger = { allywatch_ally_count = 7 }
+		localization_key = allywatch_count_7
+	}
+	text = {
+		trigger = { allywatch_ally_count = 8 }
+		localization_key = allywatch_count_8
+	}
+	text = {
+		trigger = { allywatch_ally_count = 9 }
+		localization_key = allywatch_count_9
+	}
+	# Anything past the top of the threshold ladder.
+	text = {
+		trigger = { always = yes }
+		localization_key = allywatch_count_many
+	}
+}
