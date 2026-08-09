@@ -301,6 +301,13 @@ allywatch_show_report_effect = {
 							limit = { NOT = { this = scope:allywatch_reader } }
 							custom_tooltip = allywatch_report_ally_line
 						}
+						# The reader is left out of the loop so their own portrait cannot
+						# hijack the panel, but the fact itself matters - being on the list
+						# of people this ruler can call in changes what a war costs you.
+						if = {
+							limit = { is_allied_to = scope:allywatch_reader }
+							custom_tooltip = allywatch_report_ally_is_you
+						}
 					}
 					else = {
 						custom_tooltip = allywatch_report_no_allies
@@ -323,6 +330,15 @@ allywatch_show_report_effect = {
 							variable = allywatch_ex_allies
 							limit = { NOT = { this = scope:allywatch_reader } }
 							custom_tooltip = allywatch_report_broken_line
+						}
+						if = {
+							limit = {
+								is_target_in_variable_list = {
+									name = allywatch_ex_allies
+									target = scope:allywatch_reader
+								}
+							}
+							custom_tooltip = allywatch_report_broken_is_you
 						}
 					}
 				}

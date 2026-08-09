@@ -41,9 +41,11 @@
  allywatch_msg_report:0 "@alliance_icon! Müttefik Durumu: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_report_allies_header:0 "#bold Şu an müttefik olduğu kişiler:#!"
  allywatch_report_ally_line:0 "  @alliance_icon! #P [THIS.GetCharacter.GetShortUIName]#!"
+ allywatch_report_ally_is_you:0 "  @alliance_icon! #P Sen de müttefiklerindensin.#!"
  allywatch_report_no_allies:0 "#bold Hiç müttefiği yok.#! #P Tek başına.#!"
  allywatch_report_broken_header:0 "\n#bold Sen takipteyken ittifakı bozulanlar:#!"
  allywatch_report_broken_line:0 "  @war_icon! #N [THIS.GetCharacter.GetShortUIName]#!"
+ allywatch_report_broken_is_you:0 "  @war_icon! #N Seninle olan ittifakı bozulmuştu.#!"
 
  #############################
  ### Takip listesi paneli

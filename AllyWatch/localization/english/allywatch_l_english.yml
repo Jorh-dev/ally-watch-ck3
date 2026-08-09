@@ -41,9 +41,11 @@
  allywatch_msg_report:0 "@alliance_icon! Alliance Status: [LEFT_CHARACTER.GetShortUINameNoTooltip]"
  allywatch_report_allies_header:0 "#bold Currently allied with:#!"
  allywatch_report_ally_line:0 "  @alliance_icon! #P [THIS.GetCharacter.GetShortUIName]#!"
+ allywatch_report_ally_is_you:0 "  @alliance_icon! #P You are one of their allies.#!"
  allywatch_report_no_allies:0 "#bold No allies.#! #P They stand alone.#!"
  allywatch_report_broken_header:0 "\n#bold Alliances broken while you watched:#!"
  allywatch_report_broken_line:0 "  @war_icon! #N [THIS.GetCharacter.GetShortUIName]#!"
+ allywatch_report_broken_is_you:0 "  @war_icon! #N Your own alliance with them fell apart.#!"
 
  #############################
  ### Watch list panel
