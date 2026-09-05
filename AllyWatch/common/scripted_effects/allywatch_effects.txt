@@ -247,11 +247,16 @@ allywatch_notify_ally_gained_effect = {
 			VARNAME = allywatch_last_gained
 		}
 		every_player = {
+			# Thresholds are per player, so this is checked inside the player loop.
+			# The gain ladder is the one shifted a rung up: a ruler who was inside the
+			# range the player was waiting for and just climbed out of it is worth
+			# hearing about, one who was already well above it is churn.
 			limit = {
 				is_target_in_variable_list = {
 					name = allywatch_tracked
 					target = $WATCHED$
 				}
+				allywatch_threshold_allows_gain_trigger = { WATCHED = $WATCHED$ }
 			}
 			send_interface_message = {
 				type = allywatch_msg_ally_gained

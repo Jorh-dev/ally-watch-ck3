@@ -96,6 +96,55 @@ allywatch_threshold_allows_trigger = {
 	}
 }
 
+# Should the scoped player hear about this ruler GAINING an ally?
+# Same ladder as above, shifted one rung up: the count here is already the
+# post-gain number, so "<= threshold + 1" means "they were at or below the
+# threshold before this". A ruler climbing out of the range you were waiting
+# for is the one gain worth interrupting for - your window is closing. A ruler
+# who was already well above it going higher still is just churn.
+allywatch_threshold_allows_gain_trigger = {
+	# $WATCHED$ = watched character
+	OR = {
+		NOT = { allywatch_has_threshold_trigger = { TARGET = $WATCHED$ } }
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_0 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 1 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_1 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 2 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_2 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 3 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_3 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 4 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_4 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 5 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_5 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 6 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_6 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 7 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_7 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 8 }
+		}
+		AND = {
+			is_target_in_variable_list = { name = allywatch_thr_8 target = $WATCHED$ }
+			$WATCHED$ = { allywatch_ally_count <= 9 }
+		}
+	}
+}
+
 # on_alliance_broken and on_alliance_removed can both fire for one event, so the
 # pair gets stamped for a day. Separate var per direction, otherwise a "gained"
 # stamp would swallow a "lost" notification.

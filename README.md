@@ -80,12 +80,17 @@ notifications back:
 - **Down to N allies or fewer** — silence until they hit that number.
 - **Only when they have no allies left** — the quietest setting. Nothing until they are alone.
 
+The setting covers gains too. *New Ally* arrives when a ruler who was inside the range you
+were waiting for climbs back out of it — on *only when they have no allies left*, you are
+told the moment they find their first ally again and your window closes. A ruler collecting
+their fifth ally stays quiet if you said you only care once they are down to one.
+
 Each watched ruler is set separately, and **the setting is yours alone** — in multiplayer
 your co-op partner can watch the same ruler with a completely different setting, and neither
 of you affects the other.
 
-*No Allies Left*, *New Ally* and death notifications ignore this setting and always arrive.
-They are rare and always worth knowing.
+*No Allies Left* and death notifications ignore this setting and always arrive. They are rare
+and always worth knowing.
 
 ### Sound and where notifications appear
 
